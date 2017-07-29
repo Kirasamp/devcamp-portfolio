@@ -40,7 +40,7 @@ class PortfoliosController < ApplicationController
   def show
     @portfolio_item = Portfolio.find(params[:id])
   end
-
+  
   def destroy
     # Perfom lookup
     @portfolio_item = Portfolio.find(params[:id])
