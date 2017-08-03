@@ -2255,3 +2255,70 @@ Processing by BlogsController#index as HTML
 Completed 200 OK in 76ms (Views: 74.5ms | ActiveRecord: 0.3ms)
 
 
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+Started GET "/" for 127.0.0.1 at 2017-08-03 22:36:41 +0200
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mBlog Load (0.7ms)[0m  [1m[34mSELECT  "blogs".* FROM "blogs" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mSkill Load (0.5ms)[0m  [1m[34mSELECT  "skills".* FROM "skills" LIMIT $1[0m  [["LIMIT", 11]]
+  Rendered pages/home.html.erb within layouts/application (23.3ms)
+Completed 200 OK in 274ms (Views: 251.5ms | ActiveRecord: 7.6ms)
+
+
+Started GET "/blogs" for 127.0.0.1 at 2017-08-03 22:36:47 +0200
+Processing by BlogsController#index as HTML
+  Rendering blogs/index.html.erb within layouts/application
+  [1m[36mBlog Load (0.3ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs"[0m
+  Rendered blogs/index.html.erb within layouts/application (7.7ms)
+Completed 200 OK in 58ms (Views: 56.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/blogs/new" for 127.0.0.1 at 2017-08-03 22:36:53 +0200
+Processing by BlogsController#new as HTML
+  Rendering blogs/new.html.erb within layouts/application
+  Rendered blogs/_form.html.erb (25.2ms)
+  Rendered blogs/new.html.erb within layouts/application (37.6ms)
+Completed 200 OK in 87ms (Views: 75.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/blogs" for 127.0.0.1 at 2017-08-03 22:36:56 +0200
+Processing by BlogsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"hut5uHGPWeQKw5z/V3HOpt99hXDReKoSx9Xi9U0Jqcc/RVgdS0j4HFGr92yQPnn5/HMvCc1tgiB/x24QputNWg==", "blog"=>{"title"=>"", "body"=>""}, "commit"=>"Create Blog"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  Rendering blogs/new.html.erb within layouts/application
+  Rendered blogs/_form.html.erb (3.4ms)
+  Rendered blogs/new.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 49ms (Views: 44.0ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/blogs" for 127.0.0.1 at 2017-08-03 22:37:17 +0200
+Processing by BlogsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"SSL9cOCVb3lP9DkzxdXzH51P+WAJNp+k7EHkE/gD0ZLwjNzV2lLOgRScUqACmkRAvkFTGRUjt5ZUU2j2E+E1Dw==", "blog"=>{"title"=>"Something", "body"=>"Something Complete"}, "commit"=>"Create Blog"}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBlog Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "blogs" WHERE ("blogs"."id" IS NOT NULL) AND "blogs"."slug" = $1 LIMIT $2[0m  [["slug", "something"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "blogs" ("title", "body", "created_at", "updated_at", "slug") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Something"], ["body", "Something Complete"], ["created_at", "2017-08-03 20:37:17.791818"], ["updated_at", "2017-08-03 20:37:17.791818"], ["slug", "something"]]
+  [1m[35m (18.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/blogs/something
+Completed 302 Found in 106ms (ActiveRecord: 20.0ms)
+
+
+Started GET "/blogs/something" for 127.0.0.1 at 2017-08-03 22:37:17 +0200
+Processing by BlogsController#show as HTML
+  Parameters: {"id"=>"something"}
+  [1m[36mBlog Load (0.6ms)[0m  [1m[34mSELECT  "blogs".* FROM "blogs" WHERE "blogs"."slug" = $1 ORDER BY "blogs"."id" ASC LIMIT $2[0m  [["slug", "something"], ["LIMIT", 1]]
+  Rendering blogs/show.html.erb within layouts/application
+  Rendered blogs/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 36ms (Views: 32.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/blogs" for 127.0.0.1 at 2017-08-03 22:37:20 +0200
+Processing by BlogsController#index as HTML
+  Rendering blogs/index.html.erb within layouts/application
+  [1m[36mBlog Load (0.5ms)[0m  [1m[34mSELECT "blogs".* FROM "blogs"[0m
+  Rendered blogs/index.html.erb within layouts/application (13.6ms)
+Completed 200 OK in 62ms (Views: 60.2ms | ActiveRecord: 0.5ms)
+
+
