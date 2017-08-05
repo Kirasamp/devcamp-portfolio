@@ -2322,3 +2322,49 @@ Processing by BlogsController#index as HTML
 Completed 200 OK in 62ms (Views: 60.2ms | ActiveRecord: 0.5ms)
 
 
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5396089536776303610);[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateTopics (20170805153902)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (52.4ms)[0m  [1m[35mCREATE TABLE "topics" ("id" bigserial primary key, "title" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170805153902"]]
+  [1m[35m (17.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(5396089536776303610)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5396089536776303610);[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddTopicReferenceToBlogs (20170805154557)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "blogs" ADD "topic_id" bigint[0m
+  [1m[35m (29.6ms)[0m  [1m[35mCREATE  INDEX  "index_blogs_on_topic_id" ON "blogs"  ("topic_id")[0m
+  [1m[35m (41.7ms)[0m  [1m[35mALTER TABLE "blogs" ADD CONSTRAINT "fk_rails_7f5637ea0d"
+FOREIGN KEY ("topic_id")
+  REFERENCES "topics" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170805154557"]]
+  [1m[35m (9.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5396089536776303610)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "topics" ("title", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Ruby Programming"], ["created_at", "2017-08-05 15:50:38.136172"], ["updated_at", "2017-08-05 15:50:38.136172"]]
+  [1m[35m (10.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "topics" ("title", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Software Engineering"], ["created_at", "2017-08-05 15:50:52.590114"], ["updated_at", "2017-08-05 15:50:52.590114"]]
+  [1m[35m (13.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTopic Load (0.5ms)[0m  [1m[34mSELECT  "topics".* FROM "topics" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mTopic Load (0.3ms)[0m  [1m[34mSELECT  "topics".* FROM "topics" ORDER BY "topics"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBlog Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "blogs" WHERE ("blogs"."id" IS NOT NULL) AND "blogs"."slug" = $1 LIMIT $2[0m  [["slug", "some-cool-ruby-stuff"], ["LIMIT", 1]]
+  [1m[36mTopic Load (0.3ms)[0m  [1m[34mSELECT  "topics".* FROM "topics" WHERE "topics"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "blogs" ("title", "body", "created_at", "updated_at", "slug", "topic_id") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "Some cool Ruby stuff"], ["body", "So cool"], ["created_at", "2017-08-05 15:52:18.245949"], ["updated_at", "2017-08-05 15:52:18.245949"], ["slug", "some-cool-ruby-stuff"], ["topic_id", 1]]
+  [1m[35m (16.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTopic Load (0.6ms)[0m  [1m[34mSELECT  "topics".* FROM "topics" ORDER BY "topics"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mBlog Load (0.5ms)[0m  [1m[34mSELECT  "blogs".* FROM "blogs" WHERE "blogs"."topic_id" = $1 LIMIT $2[0m  [["topic_id", 1], ["LIMIT", 11]]
+  [1m[36mBlog Load (0.6ms)[0m  [1m[34mSELECT  "blogs".* FROM "blogs" ORDER BY "blogs"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTopic Load (0.5ms)[0m  [1m[34mSELECT  "topics".* FROM "topics" WHERE "topics"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
